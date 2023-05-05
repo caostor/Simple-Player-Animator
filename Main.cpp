@@ -26,7 +26,7 @@ int main(int argc, char* args[])
     float deltaTime;
 
     Entity player(renderer);
-    player.SetAnimator("sprites.png", 4, 4, 0.9); // Configure the animator
+    player.SetAnimator("sss.png", 4, 4, 0.9); // Configure the animator
     float playerSpeed = 5.f;
     float playerMaxSpeed = 5.f;
 
@@ -49,38 +49,39 @@ int main(int argc, char* args[])
 
         const Uint8* state = SDL_GetKeyboardState(NULL);
         SDL_Point move = { 0, 0 };
+        bool moving = false;
 
         if (state[SDL_SCANCODE_A])
         {
             move.x -= (100 * playerSpeed) * deltaTime;
-            player.SwitchRow(1);
+            player.SwitchRow(2);
+            moving = true;
         }
-        else
-            player.SwitchRow(0); // Update the row
-        
+
         if (state[SDL_SCANCODE_D])
         {
             move.x += (100 * playerSpeed) * deltaTime;
-            player.SwitchRow(1);
+
+            if (!moving)
+                player.SwitchRow(3);
+
+            moving = true;
         }
-        else
-            player.SwitchRow(0);
-        
+
         if (state[SDL_SCANCODE_W])
         {
             move.y -= (100 * playerSpeed) * deltaTime;
-            player.SwitchRow(1);
+            if (!moving)
+                player.SwitchRow(1);
+            moving = true;
         }
-        else
-            player.SwitchRow(0);
-        
+
         if (state[SDL_SCANCODE_S])
         {
             move.y += (100 * playerSpeed) * deltaTime;
-            player.SwitchRow(1);
+            if (!moving)
+                player.SwitchRow(0);
         }
-        else 
-            player.SwitchRow(0);
 
         if (playerMaxSpeed < move.y)
             move.y = playerMaxSpeed;

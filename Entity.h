@@ -23,8 +23,8 @@ private:
 	SDL_Point move = { 0, 0 };
 	int CURRENT_ROW = 0;
 	int ROW_MAXIMUM = 0;
-	int SPRITE_WIDTH = 48;
-	int SPRITE_HEIGHT = 48;
+	int SPRITE_WIDTH = 102;
+	int SPRITE_HEIGHT = 152;
 	bool hasAnimation = false;
 };
 

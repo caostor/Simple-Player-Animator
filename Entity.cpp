@@ -16,7 +16,7 @@ int Entity::Move(SDL_Point movew)
 
 Uint32 Update_Animation(Uint32 interval, void* param)
 {
-    // Adds 1 to the frame and if it equals the maximum frames, resets it to 
+    // Adds 1 to the frame and if it equals the maximum frames, resets it to 0
 
     Entity* entity = static_cast<Entity*>(param);
 
@@ -43,7 +43,7 @@ int Entity::Update()
     }
     else
     {
-        // Else, only render the entity
+        // Else, only render a white square
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_Rect body = {Position.x, Position.y, 50, 50};

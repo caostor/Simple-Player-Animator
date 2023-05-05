@@ -9,7 +9,7 @@ public:
 	Entity(SDL_Renderer* rrenderer);
 	int Move(SDL_Point move);
 	int Update();
-	int SetAnimation(std::string sprite_sheet_path, int total_frame, int row_total, float speed);
+	int SetAnimator(std::string sprite_sheet_path, int total_frame, int row_total, float speed);
 	int SetAnimationSpeed(float speed);
 	int SwitchRow(int row);
 	SDL_Texture* sprite_sheet;

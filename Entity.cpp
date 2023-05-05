@@ -16,6 +16,8 @@ int Entity::Move(SDL_Point movew)
 
 Uint32 Update_Animation(Uint32 interval, void* param)
 {
+    // Adds 1 to the frame and if it equals the maximum frames, resets it to 
+
     Entity* entity = static_cast<Entity*>(param);
 
     entity->CURRENT_FRAME = (entity->CURRENT_FRAME + 1) % entity->FRAME_MAXIMUM;
@@ -30,6 +32,8 @@ int Entity::Update()
 
     if (hasAnimation)
     {
+        // If entity has an animator then update the animator and render the entity
+
         static Uint32 timer_id = SDL_AddTimer(100 / animationSpeed, Update_Animation, this);
 
         SDL_Rect srcRect = { CURRENT_FRAME * SPRITE_WIDTH, CURRENT_ROW * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT};
@@ -39,6 +43,8 @@ int Entity::Update()
     }
     else
     {
+        // Else, only render the entity
+
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_Rect body = {Position.x, Position.y, 50, 50};
         SDL_RenderFillRect(renderer, &body);
@@ -50,7 +56,7 @@ int Entity::Update()
     return 0;
 }
 
-int Entity::SetAnimation(std::string path, int total_frame, int row_total, float speed)
+int Entity::SetAnimator(std::string path, int total_frame, int row_total, float speed)
 {
 	SDL_Surface* surface = IMG_Load(&path[0]);
 	sprite_sheet = SDL_CreateTextureFromSurface(renderer, surface);

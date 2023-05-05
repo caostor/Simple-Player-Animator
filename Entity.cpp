@@ -72,7 +72,8 @@ int Entity::SetAnimationSpeed(float speed)
 
 int Entity::SwitchRow(int row)
 {
-    CURRENT_ROW = row;
+    if (row <= ROW_MAXIMUM)
+        CURRENT_ROW = row;
 
     return 0;
 }

@@ -15,7 +15,7 @@ int main(int argc, char* args[])
     SCREEN_HEIGHT = displayBounds.h;
     SCREEN_WIDTH = displayBounds.w;
 
-    SDL_Window* window = SDL_CreateWindow("Player Movement", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
+    SDL_Window* window = SDL_CreateWindow("Player Animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -38,14 +38,12 @@ int main(int argc, char* args[])
         lastTime = currentTime;
 
         while (SDL_PollEvent(&event))
-        {
             switch (event.type)
             {
             case SDL_QUIT:
                 IsOpen = false;
                 break;
             }
-        }
 
         const Uint8* state = SDL_GetKeyboardState(NULL);
         SDL_Point move = { 0, 0 };
@@ -56,36 +54,31 @@ int main(int argc, char* args[])
             player.SwitchRow(1);
         }
         else
-        {
-            player.SwitchRow(0);
-        }
+            player.SwitchRow(0); 
+        
         if (state[SDL_SCANCODE_D])
         {
             move.x += (100 * playerSpeed) * deltaTime;
             player.SwitchRow(1);
         }
         else
-        {
             player.SwitchRow(0);
-        }
+        
         if (state[SDL_SCANCODE_W])
         {
             move.y -= (100 * playerSpeed) * deltaTime;
             player.SwitchRow(1);
         }
         else
-        {
             player.SwitchRow(0);
-        }
+        
         if (state[SDL_SCANCODE_S])
         {
             move.y += (100 * playerSpeed) * deltaTime;
             player.SwitchRow(1);
         }
         else 
-        {
             player.SwitchRow(0);
-        }
 
         if (playerMaxSpeed < move.y)
             move.y = playerMaxSpeed;
